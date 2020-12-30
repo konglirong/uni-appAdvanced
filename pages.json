@@ -6,11 +6,51 @@
 				"navigationBarTitleText": "uni-app"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/about/about",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/info/info",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar":{
+		"color":"#666",
+		"selectedColor":"#ff5a5f",
+		"borderStyle":"black",
+		"list":[{
+			"pagePath":"pages/index/index",
+			"text":"首页",
+			//本地图片   大小40kb  尺寸 建议81px * 81px
+			"iconPath":"static/tabBarImg/home.png",
+			"selectedIconPath":"static/tabBarImg/homeA.png"
+		},{
+			"pagePath":"pages/about/about",
+			"text":"关于",
+			"iconPath":"static/tabBarImg/zixun.png",
+			"selectedIconPath":"static/tabBarImg/zixunA.png"
+		},{
+			"pagePath":"pages/info/info",
+			"text":"我的",
+			"iconPath":"static/tabBarImg/wode.png",
+			"selectedIconPath":"static/tabBarImg/wodeA.png"
+		}]
 	}
 }

@@ -14,8 +14,14 @@
 				title: 'Hello'
 			}
 		},
+		onTabItemTap(e) {
+			console.log(e)
+		},
 		onLoad() {
 
+		},
+		onShow(){
+			console.log('首页')
 		},
 		methods: {
 
@@ -23,7 +29,8 @@
 	}
 </script>
 
-<style>
+<style lang="less">
+	@width:200px;
 	.content {
 		display: flex;
 		flex-direction: column;
@@ -32,9 +39,9 @@
 	}
 
 	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
+		height: @width;
+		width: @width;
+		margin-top: @width;
 		margin-left: auto;
 		margin-right: auto;
 		margin-bottom: 50rpx;
@@ -43,10 +50,9 @@
 	.text-area {
 		display: flex;
 		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
+		.title {
+			font-size: 36rpx;
+			color: #8f8f94;
+		}
 	}
 </style>
