@@ -2,7 +2,7 @@
 	<view class="content">
 		<image class="logo" src="/static/logo.png"></image>
 		<view class="text-area">
-			<text class="title">{{title}}</text>
+			<text class="title" @click="open()">点击</text>
 		</view>
 	</view>
 </template>
@@ -24,13 +24,24 @@
 			console.log('首页')
 		},
 		methods: {
-
+			open(){
+				uniCloud.callFunction({
+					name:'get_list',
+					data:{},
+					success(res) {
+						console.log(res)
+					},
+					fail() {
+						console.log('fail')
+					}
+				})
+			}
 		}
 	}
 </script>
 
-<style lang="less">
-	@width:200px;
+<style lang="scss">
+	$width:200px;
 	.content {
 		display: flex;
 		flex-direction: column;
@@ -39,9 +50,9 @@
 	}
 
 	.logo {
-		height: @width;
-		width: @width;
-		margin-top: @width;
+		height: $width;
+		width: $width;
+		margin-top: $width;
 		margin-left: auto;
 		margin-right: auto;
 		margin-bottom: 50rpx;
