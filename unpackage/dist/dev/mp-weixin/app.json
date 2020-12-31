@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/about/about",
-    "pages/info/info"
+    "pages/tabbar/index/index",
+    "pages/tabbar/about/about",
+    "pages/tabbar/info/info"
   ],
   "subPackages": [],
   "window": {
@@ -13,28 +13,29 @@
   },
   "tabBar": {
     "color": "#666",
-    "selectedColor": "#ff5a5f",
+    "selectedColor": "#f07373",
     "borderStyle": "black",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/tabbar/index/index",
         "text": "首页",
-        "iconPath": "static/tabBarImg/home.png",
-        "selectedIconPath": "static/tabBarImg/homeA.png"
+        "iconPath": "static/home.png",
+        "selectedIconPath": "static/home-active.png"
       },
       {
-        "pagePath": "pages/about/about",
-        "text": "关于",
-        "iconPath": "static/tabBarImg/zixun.png",
-        "selectedIconPath": "static/tabBarImg/zixunA.png"
+        "pagePath": "pages/tabbar/about/about",
+        "text": "关注",
+        "iconPath": "static/follow.png",
+        "selectedIconPath": "static/follow-active.png"
       },
       {
-        "pagePath": "pages/info/info",
+        "pagePath": "pages/tabbar/info/info",
         "text": "我的",
-        "iconPath": "static/tabBarImg/wode.png",
-        "selectedIconPath": "static/tabBarImg/wodeA.png"
+        "iconPath": "static/my.png",
+        "selectedIconPath": "static/my-active.png"
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap57.json"
 }

@@ -1,13 +1,16 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
+			"path": "pages/tabbar/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				//自定义首页顶部导航栏
+				"navigationStyle":"custom",
+				"navigationBarTextStyle":"white"
+				
 			}
 		}
 	    ,{
-            "path" : "pages/about/about",
+            "path" : "pages/tabbar/about/about",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -16,7 +19,7 @@
             
         }
         ,{
-            "path" : "pages/info/info",
+            "path" : "pages/tabbar/info/info",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -33,24 +36,24 @@
 	},
 	"tabBar":{
 		"color":"#666",
-		"selectedColor":"#ff5a5f",
+		"selectedColor":"#f07373",
 		"borderStyle":"black",
 		"list":[{
-			"pagePath":"pages/index/index",
+			"pagePath":"pages/tabbar/index/index",
 			"text":"首页",
 			//本地图片   大小40kb  尺寸 建议81px * 81px
-			"iconPath":"static/tabBarImg/home.png",
-			"selectedIconPath":"static/tabBarImg/homeA.png"
+			"iconPath":"static/home.png",
+			"selectedIconPath":"static/home-active.png"
 		},{
-			"pagePath":"pages/about/about",
-			"text":"关于",
-			"iconPath":"static/tabBarImg/zixun.png",
-			"selectedIconPath":"static/tabBarImg/zixunA.png"
+			"pagePath":"pages/tabbar/about/about",
+			"text":"关注",
+			"iconPath":"static/follow.png",
+			"selectedIconPath":"static/follow-active.png"
 		},{
-			"pagePath":"pages/info/info",
+			"pagePath":"pages/tabbar/info/info",
 			"text":"我的",
-			"iconPath":"static/tabBarImg/wode.png",
-			"selectedIconPath":"static/tabBarImg/wodeA.png"
+			"iconPath":"static/my.png",
+			"selectedIconPath":"static/my-active.png"
 		}]
 	}
 }
