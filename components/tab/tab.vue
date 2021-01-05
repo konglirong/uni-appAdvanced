@@ -26,6 +26,10 @@
 				default(){
 					return []
 				}
+			},
+			tabIndex:{
+				type:Number,
+				default:0
 			}
 		},
 		data() {
@@ -33,8 +37,15 @@
 				activeIndex:0
 			};
 		},
+		//可以监听data 或者 props的值的变化
+		watch:{
+			tabIndex(newVal){
+				this.activeIndex = newVal
+			}
+		},
 		methods:{
 			clickTab(item,index){
+				console.log(index)
 				this.activeIndex = index
 				this.$emit('tab',{
 					data:item,

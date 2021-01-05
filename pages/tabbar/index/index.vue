@@ -2,9 +2,9 @@
 	<view class="home">
 		<!-- 自定义组件 -->
 		<navbar></navbar>
-		<tab :list="tabList" @tab="tab" />
+		<tab :list="tabList" :tabIndex="tabIndex" @tab="tab" />
 		<view class="home-list">
-			<list></list>
+			<list :tab="tabList" :activeIndex="activeIndex" @change="change"></list>
 		</view>
 	</view>
 </template>
@@ -19,6 +19,8 @@
 		data() {
 			return {
 				tabList: [],
+				tabIndex:0,
+				activeIndex:0
 			}
 		},
 		onLoad() {
@@ -28,8 +30,12 @@
 
 		},
 		methods: {
+			change(current){
+				this.tabIndex = current
+				// console.log(current)
+			},
 			tab(data, index) {
-				console.log(data, index)
+				this.activeIndex = data.index
 			},
 			getLabel() {
 				//调用云函数
