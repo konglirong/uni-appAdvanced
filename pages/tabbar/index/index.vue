@@ -32,6 +32,7 @@
 		methods: {
 			change(current){
 				this.tabIndex = current
+				this.activeIndex = current
 				// console.log(current)
 			},
 			tab(data, index) {

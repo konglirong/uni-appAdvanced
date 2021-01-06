@@ -1,7 +1,7 @@
 <template>
 	<swiper class="home-swiper" :current="activeIndex" @change="change">
 		<swiper-item v-for="(item,index) in tab" :key="index" class="swiper-item">
-			<listItem @loadmore="loadmore" :list="listCatchData[index]"></listItem>
+			<listItem :load="load[index]" @loadmore="loadmore" :list="listCatchData[index]"></listItem>
 		</swiper-item>
 	</swiper>
 </template>
@@ -28,8 +28,9 @@
 			return {
 				list: [],
 				listCatchData: {},
-				page:1,
-				pageSize:10
+				page: 1,
+				load: {},
+				pageSize: 10
 			};
 		},
 		watch: {
@@ -43,10 +44,12 @@
 			// this.getList(0)
 		},
 		methods: {
-			loadmore(){
+			loadmore() {
+				if (this.load[this.activeIndex].loading === 'noMore') return
 				console.log('上拉');
-				this.page++
-				
+				this.load[this.activeIndex].page++
+				this.getList(this.activeIndex)
+
 			},
 			change(e) {
 				const {
@@ -62,10 +65,18 @@
 
 			},
 			getList(current) {
+				if (!this.load[current]) {
+					this.load[current] = {
+						page: 1,
+						loading: 'loading'
+					}
+				}
+				console.log('88'+this.load[current].page)
+
 				this.$api.get_list({
 						name: this.tab[current].name,
-						page:this.page,
-						pageSize:this.pageSize
+						page: this.load[current].page,
+						pageSize: this.pageSize
 					})
 					.then(res => {
 						console.log(res)
@@ -73,9 +84,20 @@
 							data
 						} = res
 						this.list = data
+						if (data.length == 0) {
+							let oldLoad = {}
+							oldLoad.loading = 'noMore'
+							oldList.page = this.load[current].page
+							this.$set(this.load, current, oldLoad)
+							//强制渲染页面
+							this.$forceUpdate()
+							return
+						}
+						let oldList = this.listCatchData[current] || []
+						oldList.push(...data)
 						// this.listCatchData[current] = data
 						//懒加载
-						this.$set(this.listCatchData, current, data)
+						this.$set(this.listCatchData, current, oldList)
 					})
 			}
 		}
