@@ -1,7 +1,7 @@
 <template>
 	<swiper class="home-swiper" :current="activeIndex" @change="change">
 		<swiper-item v-for="(item,index) in tab" :key="index" class="swiper-item">
-			<listItem></listItem>
+			<listItem @loadmore="loadmore" :list="listCatchData[index]"></listItem>
 		</swiper-item>
 	</swiper>
 </template>
@@ -9,32 +9,74 @@
 <script>
 	import listItem from './list-item.vue';
 	export default {
-		components:{
+		components: {
 			listItem
 		},
-		props:{
-			tab:{
-				type:Array,
-				default(){
+		props: {
+			tab: {
+				type: Array,
+				default () {
 					return []
 				}
 			},
-			activeIndex:{
-				type:Number,
-				default:0
+			activeIndex: {
+				type: Number,
+				default: 0
 			}
 		},
 		data() {
 			return {
-
+				list: [],
+				listCatchData: {},
+				page:1,
+				pageSize:10
 			};
 		},
-		methods:{
-			change(e){
-				const {current} = e.detail
-				// console.log(e);
-				this.$emit('change',current)
+		watch: {
+			tab(newVal) {
+				if (newVal == 0) return
+				this.getList(this.activeIndex)
+			}
+		},
+		created() {
+			//tab  还没有赋值
+			// this.getList(0)
+		},
+		methods: {
+			loadmore(){
+				console.log('上拉');
+				this.page++
 				
+			},
+			change(e) {
+				const {
+					current
+				} = e.detail
+				// console.log(e);
+				// console.log(this.tab[current].name)
+				this.$emit('change', current)
+				// 当数据不存在或者长度是0的情况下 才去请求数据
+				if (!this.listCatchData[current] || this.listCatchData[current].length == 0) {
+					this.getList(current)
+				}
+
+			},
+			getList(current) {
+				this.$api.get_list({
+						name: this.tab[current].name,
+						page:this.page,
+						pageSize:this.pageSize
+					})
+					.then(res => {
+						console.log(res)
+						const {
+							data
+						} = res
+						this.list = data
+						// this.listCatchData[current] = data
+						//懒加载
+						this.$set(this.listCatchData, current, data)
+					})
 			}
 		}
 	}

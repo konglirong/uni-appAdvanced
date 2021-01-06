@@ -1,15 +1,27 @@
 <template>
-	<list-scroll class="list-scroll">
-		<list-card mode="base"></list-card>
-		<list-card mode="image"></list-card>
-		<list-card mode="column"></list-card>
-					<list-card mode="base"></list-card>
-					<list-card mode="image"></list-card>
-					<list-card mode="column"></list-card>
-	</list-scroll>
+	<list-scroll class="list-scroll" @loadmore="loadmore">
+		<list-card mode="base" :item="item" v-for="(item,index) in list" :key="index">
+		</list-card>
+		<uni-load-more iconType="snow" status="loading"></uni-load-more>
+	</list-scroll> 
 </template>
 
 <script>
+	export default{
+		props:{
+			list:{
+				type:Array,
+				default(){
+					return []
+				}
+			}
+		},
+		methods:{
+			loadmore(){
+				this.$emit('loadmore')
+			}
+		}
+	}
 </script>
 
 <style>

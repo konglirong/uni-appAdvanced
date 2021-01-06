@@ -2,41 +2,43 @@
 //获取数据库
 const db = uniCloud.database();
 exports.main = async (event, context) => {
-	//获取集合
-	const collection = db.collection('user')
-	//新增数据
-	// let res = await collection.add([
-	// 	{
-	// 		name:'vue',
-	// 		type:'前端'
-	// 	},{
-	// 		name:'html'
-	// 	}
-	// ])
-	
-	//删除数据
-	// const res = await collection.doc('5fec68825b74fb00017348cb').remove()
-	
-	//更新记录 update  set两个方法
-	//区别  updata 只能更新存在的数据    set 如果记录存在就更新，不存在就更新
-	// const res = await collection.doc('5fed2a715a3a8b0001253ea6').update({
-	// 	name:'klrHtml'
+	const {
+		name,
+		page = 1,
+		pageSize = 10
+	} = event
+	let matchObj = {};
+	if (name !== '全部') {
+		matchObj = {
+			classify: name
+		}
+	}
+
+	//聚合： 更精细化的处理数据 例如：求和 分组 指定返回那些字段
+	const list = await db.collection('article')
+		.aggregate()
+		.match(matchObj)
+		.project({
+			content: false
+		})
+		//要跳过的数据
+		.skip(pageSize * (page - 1))
+		.limit(pageSize)
+		.end()
+
+
+
+	//获取集合  //接收分类 通过分类去筛选数据
+	// const list = await db.collection('article')
+	// .field({
+	// 	//true 只返回这个字段  false表示不返回
+	// 	content:false
 	// })
-	
-	//查找
-	//doc  只能用于查询id
-	// const res = await collection.doc('5fed2a715a3a8b0001253ea5').get()
-	//where
-	const res = await collection.where({
-		name:event.name
-	}).get()
-	//event为客户端上传的参数
-	 
-	console.log(JSON.stringify(res));
+	// .get()
 	//返回数据给客户端
 	return {
-		code:200,
-		msg:'查询成功',
-		data:res.data
+		code: 200,
+		msg: '数据请求成功',
+		data: list.data
 	}
 };
