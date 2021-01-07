@@ -5,10 +5,14 @@ export  default function $http(options){
 		url,
 		data
 	} = options
+	const dataObj = {
+		user_id:'5fed44270431ca0001ca9692',
+		...data
+	}
 	return new Promise((resolve,reject)=>{
 		uniCloud.callFunction({
 			name: url,
-			data
+			data:dataObj
 		}).then(res=>{
 			if (res.result.code == 200) {
 				// .then

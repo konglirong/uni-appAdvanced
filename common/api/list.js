@@ -12,3 +12,10 @@ export const get_list = (data) => {
 		data
 	})
 }
+
+export const updata_like = (data) => {
+	return $http({
+		url:'updata_like',
+		data
+	})
+}

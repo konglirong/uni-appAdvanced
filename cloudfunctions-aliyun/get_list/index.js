@@ -1,8 +1,11 @@
 'use strict';
 //获取数据库
 const db = uniCloud.database();
+//聚合的操作符
+const $ = db.command.aggregate
 exports.main = async (event, context) => {
 	const {
+		user_id,
 		name,
 		page = 1,
 		pageSize = 10
@@ -13,10 +16,16 @@ exports.main = async (event, context) => {
 			classify: name
 		}
 	}
-
+	//获取用户表
+	const userinfo = await db.collection('user').doc(user_id).get()
+	const article_likes_ids = userinfo.data[0].article_likes_ids
 	//聚合： 更精细化的处理数据 例如：求和 分组 指定返回那些字段
 	const list = await db.collection('article')
 		.aggregate()
+		//追加字段
+		.addFields({
+			is_like:$.in(['$_id',article_likes_ids])
+		})
 		.match(matchObj)
 		.project({
 			content: false
@@ -25,9 +34,6 @@ exports.main = async (event, context) => {
 		.skip(pageSize * (page - 1))
 		.limit(pageSize)
 		.end()
-
-
-
 	//获取集合  //接收分类 通过分类去筛选数据
 	// const list = await db.collection('article')
 	// .field({
