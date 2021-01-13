@@ -41,3 +41,18 @@ export const get_detail = (data) => {
 		data
 	})
 }
+
+export const update_comment = (data) => {
+	return $http({
+		url: "updata_comment",
+		data
+	})
+}
+
+export const get_comments = (data) => {
+	return $http({
+		url: "get_comments",
+		data
+	})
+}
+
