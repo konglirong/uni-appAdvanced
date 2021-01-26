@@ -1,6 +1,9 @@
 <template>
-	<view>
-		关于
+	<view class="follow">
+		<!-- 导航切换 -->
+		<view class="follow-tab">
+			
+		</view>
 	</view>
 </template>
 
