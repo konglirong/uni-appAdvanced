@@ -10,7 +10,7 @@
 					<text>
 					基础卡片{{item.title}}
 					</text>
-					<likes :item="item"></likes>
+					<likes :types="types" :item="item"></likes>
 				</view>
 				<view class="listcard-content_des">
 					<view class="listcard-content_des_label">
@@ -34,7 +34,7 @@
 					<text>
 						多图模式{{item.title}}
 					</text>
-					<likes :item="item"></likes>
+					<likes :types="types" :item="item"></likes>
 				</view>
 				<view class="list-card-image">
 					<view class="list_card_img_item" v-if="index < 3" v-for="(item,index) in item.cover" :key="index">
@@ -64,7 +64,7 @@
 					<text>
 						大图模式{{item.title}}
 					</text>
-					<likes :item="item"></likes>
+					<likes :types="types" :item="item"></likes>
 				</view>
 
 				<view class="listcard-content_des">
@@ -91,6 +91,10 @@
 					return {}
 				}
 			},
+			types:{
+				type:String,
+				default:''
+			}
 		},
 		data() {
 			return {

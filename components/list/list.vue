@@ -46,10 +46,13 @@
 		created() {
 			// TODO tab 还没有赋值
 			// this.getList(0)
-			uni.$on('update_article',()=>{
-				this.listCatchData = {}
-				this.load = {}
-				this.getList(this.activeIndex)
+			uni.$on('update_article', (e) => {
+				console.log(e)
+				if (e === 'follow') {
+					this.listCatchData = {}
+					this.load = {}
+					this.getList(this.activeIndex)
+				}
 			})
 		},
 		methods: {
@@ -76,7 +79,7 @@
 						loading: 'loading'
 					}
 				}
-				console.log('当前的页数',this.load[current].page);
+				console.log('当前的页数', this.load[current].page);
 				this.$api.get_list({
 					name: this.tab[current].name,
 					page: this.load[current].page,

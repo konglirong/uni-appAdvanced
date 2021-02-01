@@ -4,9 +4,13 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	state:{
+		userinfo:uni.getStorageSync('USERINFO') || {},
 		historyList:uni.getStorageSync("__history")||[]
 	},
 	mutations:{
+		SET_USER_INFO(state,userinfo){
+			state.userinfo = userinfo
+		},
 		set_historyList(status,history){
 			status.historyList = history
 		},
@@ -15,6 +19,10 @@ const store = new Vuex.Store({
 		}
 	},
 	actions:{
+		set_userinfo({commit},userinfo){
+			uni.setStorageSync('USERINFO',userinfo)
+			commit('SET_USER_INFO',userinfo)
+		},
 		set_history({commit,state},history){
 			let list = state.historyList
 			list.unshift(history)
