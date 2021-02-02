@@ -31,7 +31,6 @@ page {
   display: flex;
 }
 .follow {
-  height: 100%;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;

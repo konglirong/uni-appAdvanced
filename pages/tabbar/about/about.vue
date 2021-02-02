@@ -17,13 +17,14 @@
 					<list-scroll>
 						<uni-load-more v-if="list.length===0 && !articleShow" iconType="snow" status="loading"></uni-load-more>
 						<list-card v-for="(item,index) in list" :key="item._id" types="follow" :item="item"></list-card>
-						<view class="no-data" v-if="articleShow">没有数据</view>
+						<view class="no-data" v-if="articleShow">没有收藏文章</view>
 					</list-scroll>
 				</swiper-item>
 				<swiper-item>
 					<!-- <view class="swiper-item">作者</view> -->
 					<list-scroll>
 						<list-author v-for="item in authorList" :key="item.id" :item="item"></list-author>
+						<view class="no-data" v-if="followShow">没有关注作者</view>
 					</list-scroll>
 				</swiper-item>
 			</swiper>
@@ -37,8 +38,9 @@
 			return {
 				activeIndex: 0,
 				list: [],
-				authorList:[],
-				articleShow: false
+				authorList: [],
+				articleShow: false,
+				followShow: false,
 			}
 		},
 		onTabItemTap(e) {
@@ -49,11 +51,11 @@
 		},
 		onLoad() {
 			// 自定义页面， $on  只能在打开的页面触发
-			uni.$on('update_article',()=>{
+			uni.$on('update_article', () => {
 				console.log('关注页面触发')
 				this.getFollow()
 			})
-			uni.$on('updata_author',()=>{
+			uni.$on('updata_author', () => {
 				this.getAuthor()
 			})
 			this.getFollow()
@@ -63,7 +65,7 @@
 			tab(index) {
 				this.activeIndex = index
 			},
-			change(e){
+			change(e) {
 				const current = e.detail.current
 				this.activeIndex = current
 			},
@@ -76,16 +78,17 @@
 					this.articleShow = this.list.length === 0 ? true : false
 				})
 			},
-			getAuthor(){
-				this.$api.get_author().then(res=>{
+			getAuthor() {
+				this.$api.get_author().then(res => {
 					const {
 						data
 					} = res
 					this.authorList = data
 					console.log(data)
+					this.followShow = this.authorList.length === 0 ? true : false
 				})
 			}
-			
+
 		}
 	}
 </script>
@@ -97,7 +100,7 @@
 	}
 
 	.follow {
-		height: 100%;
+		// height: 100%;
 		display: flex;
 		flex-direction: column;
 		flex: 1;
@@ -146,7 +149,8 @@
 			}
 		}
 	}
-	.no-data{
+
+	.no-data {
 		padding: 50px;
 		font-size: 14px;
 		color: #999;

@@ -146,6 +146,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var _default =
 {
   props: {
@@ -188,6 +190,11 @@ var _default =
     menuButtonInfo.top - info.statusBarHeight);
 
     this.windowWidth = menuButtonInfo.left;
+
+
+
+    this.statusBarHeight = 0;
+
 
   },
   methods: {

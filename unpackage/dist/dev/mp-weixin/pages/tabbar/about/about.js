@@ -176,6 +176,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
@@ -183,7 +184,8 @@ var _default =
       activeIndex: 0,
       list: [],
       authorList: [],
-      articleShow: false };
+      articleShow: false,
+      followShow: false };
 
   },
   onTabItemTap: function onTabItemTap(e) {
@@ -228,6 +230,7 @@ var _default =
         res.data;
         _this3.authorList = data;
         console.log(data);
+        _this3.followShow = _this3.authorList.length === 0 ? true : false;
       });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

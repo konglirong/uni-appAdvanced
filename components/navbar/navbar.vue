@@ -2,7 +2,9 @@
 	<view class="navbar">
 		<view class="navbar-fixed">
 			<!-- 状态栏占位 -->
+			<!-- #ifdef MP-ALIPAY -->
 			<view :style="{height:statusBarHeight+'px'}"></view>
+			<!-- #endif -->
 			<!-- 导航栏内容 -->
 			<view @click.stop="open" class="navbar-content" :class="{search:isSearch}" :style="{height:navbarHeight+'px',width:windowWidth+'px'}">
 				<view v-if="isSearch" class="navbar-content_search-icons" @click="back">
@@ -69,6 +71,11 @@
 			)
 			this.windowWidth = menuButtonInfo.left
 			// #endif 
+			
+			// #ifndef MP-ALIPAY
+			this.statusBarHeight = 0
+			// #endif
+			
 		},
 		methods:{
 			back(){
