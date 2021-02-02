@@ -61,10 +61,12 @@
   width: 100%;
 }
 .list-card .list-card-content .listcard-content_title {
+  padding-right: 30px;
   font-size: 14px;
   color: #333;
   font-weight: 400;
   line-height: 1.2;
+  position: relative;
 }
 .list-card .list-card-content .listcard-content_title text {
   overflow: hidden;

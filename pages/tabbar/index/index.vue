@@ -12,6 +12,7 @@
 <script>
 	//easyCom components/组件/组件名.vue 局部引用
 	// import navbar from '@/components/navbar/navbar.vue'
+	import {mapState} from 'vuex'
 	export default {
 		// components:{
 		// 	navbar
@@ -23,6 +24,14 @@
 				activeIndex:0
 			}
 		},
+		computed:{
+			...mapState(['userinfo'])
+		},
+		watch:{
+			userinfo(newVal){
+				this.getLabel()
+			}
+		},
 		onLoad() {
 			uni.$on('labelChange',(res)=>{
 				this.tabList = []
@@ -30,7 +39,6 @@
 				this.activeIndex = 0
 				this.getLabel()
 			})
-			this.getLabel()
 		},
 		onShow() {
 

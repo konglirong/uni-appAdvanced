@@ -2,6 +2,7 @@
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
+			//异步请求
 			this.$api.get_user({
 				user_id: '5fed44270431ca0001ca9692'
 			}).then(res => {

@@ -1,7 +1,6 @@
 {
+  "component": true,
   "usingComponents": {
-    "list-scroll": "/components/list-scroll/list-scroll",
-    "list-card": "/components/list-card/list-card"
-  },
-  "component": true
+    "list-item": "/components/list/list-item"
+  }
 }

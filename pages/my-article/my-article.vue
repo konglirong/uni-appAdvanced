@@ -23,7 +23,7 @@
 					console.log(res)
 					const {data} = res
 					this.lists = data
-					this.articleShow = this.list.length === 0 ? true : false
+					this.articleShow = this.lists.length === 0 ? true : false
 				})
 			}
 		}
